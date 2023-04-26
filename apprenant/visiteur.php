@@ -1,15 +1,10 @@
 <?php
-session_start();
-$connection = mysqli_connect("localhost", "root", "", "centre_formation");
-if(!empty($_SESSION["ID_apprenant"])){
-    $id = $_SESSION["ID_apprenant"];
-    $result = mysqli_query($connection, "SELECT * FROM apprenant WHERE ID_apprenant = $id");
-    $row = mysqli_fetch_assoc($result);
-}
-else{
-    header("Location: login.php");
+$connection = mysqli_connect('localhost', 'root', '', 'centre_formation');
+if ($connection->connect_error) {
+  die("Connection failed: " . $connection->connect_error);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,23 +29,14 @@ else{
         <li class="nav-item">
             <a class="nav-link active" href="home.php">Home</a>
         </li>
-
-        <li class="nav-item">
-            <a class="nav-link " href="Formations.php">Formations</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link " href="profil.php">Profil </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link " href="registration.php">My registrations</a>
-        </li>
-
-        </ul>
         <div>
-            <form action="logout.php" method="get">
-                <input type="submit" value="Log out" class="btn btn-danger" name="logout">
+            <form action="signup.php" method="get">
+                <input type="submit" value="Sign up" class="btn " name="signup">
+            </form>
+        </div>
+        <div>
+            <form action="index.php" method="get">
+                <input type="submit" value="Login" class="btn " name="login" >
             </form>
         </div>
     </div>
@@ -101,13 +87,13 @@ else{
 
         <form method = "GET" action = "search_formation.php" class="input-group">
             
-            <input type="search" name="searchFormation" id="" class="form-control" placeholder="Search" required/>
+            <input type="search" name="searchFormation" id="" class="form-control" placeholder="Search" required/> -->
 
             <!-- <select name="searchFormation" id="sujet">
                 <option value="hh">hh</option>
                 <option value="hhhhh">hhhh</option>
 
-            </select> -->
+            </select>-->
         </form>
 
     </div>
@@ -168,7 +154,7 @@ if( mysqli_num_rows ( $result ) > 0 ){
             </div>
             <p class="card-text">'  .$row['description']. '</p>
     
-            <input type="hidden" name="ID_formation" type = "submit" value ="'.$ID_formation.'">
+            <input type="hidden" name="id_formation" type = "submit" value ="'.$ID_formation.'">
             <input class="btn" type="submit" value = "Details" style = "width : 50% ; background-color: #7754F6; ">
     
         </div>
