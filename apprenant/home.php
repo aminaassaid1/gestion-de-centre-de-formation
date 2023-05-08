@@ -69,8 +69,6 @@ else{
 <!-- Filter  -->
 
 <div class="albumPrds album py-5">
-
-<div class="row">
     <h2 class="text-center">Our Formations</h2>
 </div>
 
@@ -116,7 +114,6 @@ else{
 
 
 
-</div>
 </div>
 
 
@@ -204,9 +201,6 @@ echo json_encode($response);
 
 
 ?>
-</div>
-</div>
-
 
 <!-- About US -->
 <script src="script.js"></script>
