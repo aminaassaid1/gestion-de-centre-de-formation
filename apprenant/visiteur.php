@@ -87,7 +87,7 @@ if ($connection->connect_error) {
 
         <form method = "GET" action = "search_formation.php" class="input-group">
             
-            <input type="search" name="searchFormation" id="" class="form-control" placeholder="Search" required/> -->
+            <input type="search" name="searchFormation" id="" class="form-control" placeholder="Search" required/>
 
             <!-- <select name="searchFormation" id="sujet">
                 <option value="hh">hh</option>
@@ -153,9 +153,6 @@ if( mysqli_num_rows ( $result ) > 0 ){
                 <p class="card-text"><strong>Masse Horaire :</strong> '  .$row['duree']. 'h</p>
             </div>
             <p class="card-text">'  .$row['description']. '</p>
-    
-            <input type="hidden" name="id_formation" type = "submit" value ="'.$ID_formation.'">
-            <input class="btn" type="submit" value = "Details" style = "width : 50% ; background-color: #7754F6; ">
     
         </div>
         

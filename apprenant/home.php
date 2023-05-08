@@ -40,7 +40,7 @@ else{
         </li>
 
         <li class="nav-item">
-            <a class="nav-link " href="profil.php">Profil </a>
+            <a class="nav-link " href="profile.php">Profil </a>
         </li>
 
         <li class="nav-item">
@@ -69,6 +69,8 @@ else{
 <!-- Filter  -->
 
 <div class="albumPrds album py-5">
+
+<div class="row">
     <h2 class="text-center">Our Formations</h2>
 </div>
 
@@ -114,6 +116,7 @@ else{
 
 
 
+</div>
 </div>
 
 
@@ -162,9 +165,9 @@ if( mysqli_num_rows ( $result ) > 0 ){
         <form method = "GET" action = "session.php" class=" card "  style=" background-color: #BBA8FF;">
         <div class="card-body">
             <h4 class="card-title">' .$row['sujet']. '</h4>
-            <div>
-                <p class="card-text"><strong>Categorie :</strong> '  .$row['categorie']. '</p>
-                <p class="card-text"><strong>Masse Horaire :</strong> '  .$row['duree']. 'h</p>
+            <div d-flex flex-row >
+                <div class="p-2"><p class="card-text"><strong>Category :</strong> '  .$row['categorie']. '</p></div>
+                <div class="p-2"><p class="card-text"><strong>duration :</strong> '  .$row['duree']. 'h</p></div>
             </div>
             <p class="card-text">'  .$row['description']. '</p>
     
@@ -201,6 +204,9 @@ echo json_encode($response);
 
 
 ?>
+</div>
+</div>
+
 
 <!-- About US -->
 <script src="script.js"></script>

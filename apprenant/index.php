@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_SESSION["ID_apprenant"])) {
+    header("location:home.php");
+}
 $msgs="";
 if (isset($_POST['login'])){
      $email = $_POST['email'];
@@ -7,7 +10,6 @@ if (isset($_POST['login'])){
 
    // Connect to database
 $connection = mysqli_connect("localhost", "root", "", "centre_formation");
-
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
