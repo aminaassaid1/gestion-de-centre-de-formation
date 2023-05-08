@@ -43,10 +43,7 @@ if (isset($_GET['joinSession'])) {
          WHERE ID_session = $idSess;"
     );
     $id_formation = mysqli_fetch_all($sql_formation)[0][0];
-            if($fetch["etat_session"] == "cloturée" || "annulée" || ""){
-                header("Location: session.php?response=notdispo&ID_formation=".$id_formation);
-                exit();
-            }elseif ($num_session < 2 && !checksession($num_session_Data,$idSess) && $ChauvechementCount == 0 ) {
+            if ($num_session < 2 && !checksession($num_session_Data,$idSess) && $ChauvechementCount == 0 ) {
                 $checkres = mysqli_query($connection, "SELECT * FROM session WHERE ID_session = '$idSess'");
                 $sqljoin= mysqli_query($connection, "INSERT INTO inscription(ID_apprenant, ID_session) VALUES ('$idApp', '$idSess')");
                 header("Location: session.php?response=done&ID_formation=".$id_formation);

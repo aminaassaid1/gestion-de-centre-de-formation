@@ -101,15 +101,11 @@ else{
 
     <div class="searchdiv col-md-4">
 
-        <form method = "GET" action = "search_formation.php" class="input-group">
+        <form method = "GET" class="input-group">
             
-            <input type="search" name="searchFormation" id="" class="form-control" placeholder="Search" required/>
+            <input type="search" name="searchFormation" id="searchInput" class="form-control" placeholder="Search" required/>
 
-            <!-- <select name="searchFormation" id="sujet">
-                <option value="hh">hh</option>
-                <option value="hhhhh">hhhh</option>
-
-            </select> -->
+            
         </form>
 
     </div>
@@ -209,7 +205,41 @@ echo json_encode($response);
 
 
 <!-- About US -->
-<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script  src="script.js"></script>
+<script type="text/javascript" >
+    $(document).ready(function () {
+    $("#searchInput").on('keyup',()=>{
+        var dataValue = document.querySelector("#searchInput").value;
+        console.log(dataValue);
+        // fetch(`formationapi.php?data=${dataValue}`).then(async (response)=>{
+        //      let data = await response;
+        //     return data
+        // }).then(data=>{
+        //     console.log(data)
+        // });
+        $.ajax({
+            type: 'POST',
+            url: 'formationapi.php',
+            data: {
+                title: dataValue
+            },
+            dataType: 'json',
+            success: function (response) {
+                document.querySelector('.latestsProductsdiv').innerHtml = '';
+                response.foreach(
+                    (formation)=>{
+                        document.querySelector('.latestsProductsdiv').append(formation["sujet"])
+                    }
+                )
+
+            }
+        });
+    });
+});
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 </html>
