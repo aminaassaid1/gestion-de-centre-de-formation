@@ -31,12 +31,12 @@ if ($connection->connect_error) {
         </li>
         <div>
             <form action="signup.php" method="get">
-                <input type="submit" value="Sign up" class="btn " name="signup">
+                <input type="submit" value="Sign up" class="btn " style = "width : 200px ; background-color: #BBA8FF; " name="signup">
             </form>
         </div>
         <div>
             <form action="index.php" method="get">
-                <input type="submit" value="Login" class="btn " name="login" >
+                <input type="submit" value="Login" class="btn " style = "width : 200px ; background-color: #BBA8FF; " name="login" >
             </form>
         </div>
     </div>

@@ -43,12 +43,13 @@ else{
             <a class="nav-link " href="profile.php">Profil </a>
         </li>
         </ul>
-        <div>
+        
+    </div>
+    <div>
             <form action="logout.php" method="get">
-                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #3B1BB0; " name="logout">
+                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #BBA8FF; " name="logout">
             </form>
         </div>
-    </div>
 
     </div>
 </nav>
@@ -141,7 +142,7 @@ $result = mysqli_query($connection, $formationssql);
 
 if( mysqli_num_rows ( $result ) > 0 ){
 
-    echo ' <div class="latestsProductsdiv row">';
+    echo ' <div id="content" class="latestsProductsdiv row">';
 
    $sujet = array();
 
@@ -208,7 +209,6 @@ echo json_encode($response);
     $(document).ready(function () {
     $("#searchInput").on('keyup',()=>{
         var dataValue = document.querySelector("#searchInput").value;
-        console.log(dataValue);
         // fetch(`formationapi.php?data=${dataValue}`).then(async (response)=>{
         //      let data = await response;
         //     return data
@@ -223,14 +223,28 @@ echo json_encode($response);
             },
             dataType: 'json',
             success: function (response) {
-                document.querySelector('.latestsProductsdiv').innerHtml = '';
-                response.foreach(
-                    (formation)=>{
-                        document.querySelector('.latestsProductsdiv').append(formation["sujet"])
-                       
-                    }
-                )
-
+                document.querySelector('#content').innerHTML = '';
+               for (let index = 0; index < response.length; index++) {
+                document.querySelector('#content').innerHTML +=
+                `<div class="col-md-4 mb-4">
+        <form method = "GET" action = "session.php" class=" card "  style=" background-color: #BBA8FF;">
+        <div class="card-body">
+            <h4 class="card-title">`+response[index][1]+`'</h4>
+            <div d-flex flex-row >
+                <div class="p-2"><p class="card-text"><strong>Category :</strong>`+response[index][2]+`</p></div>
+                <div class="p-2"><p class="card-text"><strong>duration :</strong>`+response[index][3]+`'h</p></div>
+            </div>
+            <p class="card-text">`+response[index][4]+`</p>
+    
+    <input type="hidden" name="ID_formation" type = "submit" value ="`+response[index][0]+`">
+            <input class="btn" type="submit" value = "Details" style = "width : 50% ; background-color: #7754F6; ">
+    
+        </div>
+        
+        </form>
+        </div>` 
+                
+               }
             }
         });
     });

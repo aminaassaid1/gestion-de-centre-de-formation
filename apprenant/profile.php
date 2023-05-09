@@ -105,37 +105,36 @@ color:#69707a;
 </head>
 <body>
 
-         <!-- navbar -->
-         <div class="barzone">
-        <nav class="navbar navbar-default navbar-trans navbar-expand-lg" >
-            <div class="container">
-                <a class="navbar-brand text-brand" href="home.php">GrowthZone</a>
+<div class="barzone">
+<nav class="navbar navbar-default navbar-trans navbar-expand-lg" >
+    <div class="container">
+    <a class="navbar-brand text-brand" href="home.php">GrowthZone</a>
 
-                <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
-                    <ul class="navbar-nav">
+    <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+        <ul class="navbar-nav">
 
-                        <li class="nav-item">
-                            <a class="nav-link active" href="home.php">Home</a>
-                        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="home.php">Home</a>
+        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link " href="Formations.php">My registrations</a>
-                        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="Formations.php">My registrations</a>
+        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link " href="profile.php">Profil </a>
-                        </li>
-                        </ul>
-                            <div>
-                                <form action="logout.php" method="get">
-                                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #3B1BB0; " name="logout">
-                            </form>
-                    </div>
-                </div>
+        <li class="nav-item">
+            <a class="nav-link " href="profile.php">Profil </a>
+        </li>
+        </ul>
 
-            </div>
-        </nav>
     </div>
+    <div>
+            <form class="" action="logout.php" method="get">
+                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #BBA8FF; " name="logout">
+            </form>
+        </div>
+    </div>
+</nav>
+</div>
 <div class="">
 
 <div class="card mb-4">

@@ -33,20 +33,20 @@
             <a class="nav-link " href="profile.php">Profil </a>
         </li>
         </ul>
-        <div>
-            <form action="logout.php" method="get">
-                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #3B1BB0; " name="logout">
+
+    </div>
+    <div>
+            <form class="" action="logout.php" method="get">
+                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #BBA8FF; " name="logout">
             </form>
         </div>
-    </div>
-
     </div>
 </nav>
 </div>
 
 
 <div class="row">
-    <h2 class="text-center">My registrations</h2>
+    <h2 class="text-center py-5">My registrations</h2>
 </div>
 
 <?php
@@ -71,7 +71,7 @@ if (isset($_SESSION["ID_apprenant"]) && !empty($_SESSION["ID_apprenant"])) {
 
     $result = mysqli_query($connection, $historique);
     if (mysqli_num_rows($result) > 0) {
-        echo '<div class="row" style="width:60%; margin:auto;">';
+        echo '<div class="row d-flex justify-content-around py-5" style="width:90%; margin:auto;">';
         while ($row = mysqli_fetch_assoc($result)) {
             echo ' <div class="card col-md-5" style=" background-color: #BBA8FF;">
             <h3><strong>Title: </strong>' . $row['sujet'] . '</h3>
