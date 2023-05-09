@@ -26,21 +26,16 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link " href="Formations.php">Formations</a>
+            <a class="nav-link " href="Formations.php">My registrations</a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link " href="profile.php">Profil </a>
         </li>
-
-        <li class="nav-item">
-            <a class="nav-link " href="registration.php">My registrations</a>
-        </li>
-
         </ul>
         <div>
             <form action="logout.php" method="get">
-                <input type="submit" value="Log out" class="btn btn-danger" name="logout">
+                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #7754F6; " name="logout">
             </form>
         </div>
     </div>
@@ -51,7 +46,7 @@
 
 
 <div class="row">
-    <h2 class="text-center">Formation</h2>
+    <h2 class="text-center">My registrations</h2>
 </div>
 
 <?php
@@ -79,10 +74,10 @@ if (isset($_SESSION["ID_apprenant"]) && !empty($_SESSION["ID_apprenant"])) {
         echo '<div class="row" style="width:60%; margin:auto;">';
         while ($row = mysqli_fetch_assoc($result)) {
             echo ' <div class="card col-md-5" style=" background-color: #BBA8FF;">
-            <h3><strong>Titre: </strong>' . $row['sujet'] . '</h3>
+            <h3><strong>Title: </strong>' . $row['sujet'] . '</h3>
                 <p><strong>Date: </strong>' . $row['date_debut'] . ' / ' . $row['date_fin'] . '</p>
-                <div class=""><strong>Resultat: </strong><span>' . $row['resultat'] . '</span></div>
-                <div class=""><strong>Date Evaluation: </strong><span>' . $row['date_evaluation'] . '</span></div>
+                <div class=""><strong>Result: </strong><span>' . $row['resultat'] . '</span></div>
+                <div class=""><strong>Date Assessment: </strong><span>' . $row['date_evaluation'] . '</span></div>
             </div>';
         }
         echo '</div>';

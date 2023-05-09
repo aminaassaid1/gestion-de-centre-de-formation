@@ -36,21 +36,16 @@ else{
         </li>
 
         <li class="nav-item">
-            <a class="nav-link " href="Formations.php">Formations</a>
+            <a class="nav-link " href="Formations.php">My registrations</a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link " href="profile.php">Profil </a>
         </li>
-
-        <li class="nav-item">
-            <a class="nav-link " href="registration.php">My registrations</a>
-        </li>
-
         </ul>
         <div>
             <form action="logout.php" method="get">
-                <input type="submit" value="Log out" class="btn btn-danger" name="logout">
+                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #7754F6; " name="logout">
             </form>
         </div>
     </div>
@@ -84,7 +79,7 @@ else{
         
                 <option value="" name = "allCategories" >All Categories</option>
         
-                <option value="informatique" name = "informatique" >Informatique</option>
+                <option value="informatique" name = "informatique" >Computer science</option>
                 <option value="Commerce" name = "gaming">Commerce</option>
                 <option value="desing" name = "">desing</option>
                 
@@ -232,6 +227,7 @@ echo json_encode($response);
                 response.foreach(
                     (formation)=>{
                         document.querySelector('.latestsProductsdiv').append(formation["sujet"])
+                       
                     }
                 )
 

@@ -5,7 +5,12 @@ $connection = mysqli_connect('localhost', 'root', '', 'centre_formation');
 if ($connection->connect_error) {
   die("Connection failed: " . $connection->connect_error);
 }
-
+if(!empty(["ID_apprenant"])){
+    $id = $_SESSION["ID_apprenant"];
+    $result = mysqli_query($connection, "SELECT * FROM `apprenant` WHERE `ID_apprenant` = $id");
+}else{
+    header("Location:index.php");
+}
 if (isset($_POST['update'])) {
     $fname = $_POST['Fname'];
     $lname = $_POST['Lname'];
@@ -16,7 +21,8 @@ if (isset($_POST['update'])) {
 
     
   
-    mysqli_query($connection,"UPDATE apprenant SET nom='$fname', prenom='$lname', email='$email', mot_de_passe='$hashed_password' WHERE ID_apprenant='$id'");
+    $result = mysqli_query($connection,"UPDATE apprenant SET nom='$fname', prenom='$lname', email='$email', mot_de_passe='$hashed_password' WHERE ID_apprenant='$id'");
+    $row = mysqli_fetch_assoc($result);
     
     header('Location: profile.php');
     exit();
@@ -32,7 +38,7 @@ if (isset($_POST['update'])) {
 <meta charset="utf-8">
 
 
-<title>bs5 edit profile account details - Bootdey.com</title>
+<title>edit profile account details </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
@@ -113,21 +119,16 @@ color:#69707a;
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " href="Formations.php">Formations</a>
+                            <a class="nav-link " href="Formations.php">My registrations</a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link " href="profile.php">Profil </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link " href="registration.php">My registrations</a>
-                        </li>
-
                         </ul>
                             <div>
                                 <form action="logout.php" method="get">
-                                <input type="submit" value="Log out" class="btn btn-danger" name="logout">
+                                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #7754F6; " name="logout">
                             </form>
                     </div>
                 </div>
@@ -135,40 +136,48 @@ color:#69707a;
             </div>
         </nav>
     </div>
-<div class="col-xl-8">
+<div class="">
 
 <div class="card mb-4">
 <div class="card-header">Account Details</div>
 <div class="card-body">
-<form method="POST" action="">
+    <?php
+     $sql="SELECT * FROM `apprenant` WHERE `ID_apprenant` =$id";
+     $result=mysqli_query($connection,$sql);
+    while($row=mysqli_fetch_assoc($result)){
+        ?>
+        <form method="POST" action="">
 
-  <div class="row gx-3 mb-3">
+            <div class="row gx-3 mb-3">
 
-    <div class="col-md-6">
-      <label class="small mb-1" for="inputFirstName">First name</label>
-      <input class="form-control" id="inputFirstName" type="text" name="Fname" placeholder="Enter your first name" required>
-    </div>
+            <div class="col-md-6">
+                <label class="small mb-1" for="inputFirstName">First name</label>
+                <input class="form-control" id="inputFirstName" type="text" name="Fname" placeholder="Enter your first name" required value="<?php echo $row["nom"]?>">
+            </div>
 
-    <div class="col-md-6">
-      <label class="small mb-1" for="inputLastName">Last name</label>
-      <input class="form-control" id="inputLastName" name="Lname" type="text" placeholder="Enter your last name" required>
-    </div>
+            <div class="col-md-6">
+                <label class="small mb-1" for="inputLastName">Last name</label>
+                <input class="form-control" id="inputLastName" name="Lname" type="text" placeholder="Enter your last name" required value="<?php echo $row["prenom"]?>">
+            </div>
 
-  </div>
+            </div>
 
-  <div class="mb-3">
-    <label class="small mb-1" for="inputEmailAddress">Email</label>
-    <input class="form-control" id="inputEmailAddress" name="email" type="email" placeholder="Enter your email address" required>
-  </div>
+            <div class="mb-3">
+                <label class="small mb-1" for="inputEmailAddress">Email</label>
+                <input class="form-control" id="inputEmailAddress" name="email" type="email" placeholder="Enter your email address" required value="<?php echo $row["email"]?>">
+            </div>
 
-  <div class="mb-3">
-    <label class="small mb-1" for="inputPassword">Password</label>
-    <input class="form-control" id="inputPassword" type="password" name="password" placeholder="Enter a new password" required>
-  </div>
+            <div class="mb-3">
+                <label class="small mb-1" for="inputPassword">Password</label>
+                <input class="form-control" id="inputPassword" type="password" name="password" placeholder="Enter a new password" required>
+            </div>
 
-  <button class="btn btn-primary" type="submit" name="update">Save changes</button>
+            <button class="btn btn-primary" type="submit" name="update">Save changes</button>
 
-</form>
+        </form>
+        <?php
+    }
+    ?>
 
 </div>
 </div>

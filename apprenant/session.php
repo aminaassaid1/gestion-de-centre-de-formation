@@ -32,21 +32,16 @@ if(!empty($_SESSION["ID_apprenant"])){
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " href="Formations.php">Formations</a>
+                            <a class="nav-link " href="Formations.php">My registrations</a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link " href="profile.php">Profil </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link " href="registration.php">My registrations</a>
-                        </li>
-
                         </ul>
                             <div>
                                 <form action="logout.php" method="get">
-                                <input type="submit" value="Log out" class="btn btn-danger" name="logout">
+                                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #7754F6; " name="logout">
                             </form>
                     </div>
                 </div>
@@ -228,11 +223,11 @@ if(!empty($_SESSION["ID_apprenant"])){
 
         <div class="card-body">
             <h4 class="card-title">Session ID '.$row["ID_session"].'</h4>
-            <p class="card-text"><strong>Date debut :</strong> ' .$row['date_debut']. '</p>
-            <p class="card-text"><strong>Date fin :</strong> ' .$row['date_fin']. '</p>
-            <p class="card-text"><strong>Fomateur :</strong> ' .$row['nom']. ' ' .$row['prenom']. '</p>
-            <p class="card-text"><strong>Les Places :</strong> ' .$row['nbr_places_max'].'</p>
-            <p class="card-text"><strong>Les Places Disponibles :</strong> ' .$row['nbr_places_max'] - $placesReserver.'</p>
+            <p class="card-text"><strong>Start date :</strong> ' .$row['date_debut']. '</p>
+            <p class="card-text"><strong>End date:</strong> ' .$row['date_fin']. '</p>
+            <p class="card-text"><strong>Former :</strong> ' .$row['nom']. ' ' .$row['prenom']. '</p>
+            <p class="card-text"><strong>Places :</strong> ' .$row['nbr_places_max'].'</p>
+            <p class="card-text"><strong>Available Seats :</strong> ' .$row['nbr_places_max'] - $placesReserver.'</p>
             <p class="card-text"><strong>Etat :</strong> ' .$row['etat_session']. '</p>
     
             <form action="gestioninscription.php" method="get">
