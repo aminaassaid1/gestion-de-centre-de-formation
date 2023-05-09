@@ -35,7 +35,7 @@
         </ul>
         <div>
             <form action="logout.php" method="get">
-                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #7754F6; " name="logout">
+                <input type="submit" value="Log out" class="btn" style = "width : 200px ; background-color: #3B1BB0; " name="logout">
             </form>
         </div>
     </div>
