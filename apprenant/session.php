@@ -50,6 +50,7 @@ if(!empty($_SESSION["ID_apprenant"])){
         </nav>
     </div>
 
+
     <section>
         <?php
             if(isset($_GET["response"])){
@@ -158,6 +159,9 @@ if(!empty($_SESSION["ID_apprenant"])){
 
         ?>
     </section>
+
+
+    
     
     <!-- carte détaile -->
 
@@ -191,7 +195,59 @@ if(!empty($_SESSION["ID_apprenant"])){
 
 <h1 class ="text-center">Les Sessions</h1>
 
+
+<section>
+
+            <div class="filterdiv col-md-6 mb-3">
+
+                <form action = "" method = "GET" class="" >
+
+                    <select class="btn btn-outline-dark" name="état" id = "état">
+                
+                        <option value="" name = "allCategories" >All</option>
+                        <option value="en_cours_inscription" name = "informatique" >en cours d'inscription</option>
+                        <option value="inscription_achevée" name = "inscription_achevée">inscription achevée</option>
+                        <option value="annulée" name = "annulée">annulée</option>
+                        <option value="en_cour" name = "en_cour">en cours</option>
+                        <option value="cloturée" name = "cloturée">cloturée</option>
+                        
+                    </select>
+                    <input type="text" class="d-none" value="<?=$ID_formation?>" name="ID_formation">
+                        <input class="btn btn-success" type="submit" value="submit" name="filteretat" id = "">
+                </form>
+
+            </div>
+    </section>
+
+
+
 <?php
+
+$sessionsql = 
+"SELECT * FROM `session`";
+
+if(isset($_GET['filteretat'])){
+    $état = $_GET['état'];
+    if ($état != ""){
+
+        $sessionsql = "SELECT * FROM session s 
+        INNER JOIN formation f ON f.ID_formation = s.ID_formation 
+        INNER JOIN formateur ff ON ff.ID_formateur = s.ID_formateur
+        WHERE s.etat_session = '$état' 
+        AND f.ID_formation = $ID_formation";
+
+        $result = mysqli_query($connection, $sessionsql);
+
+}else {
+    $sessionAfficher = 
+    "SELECT * FROM session s 
+    INNER JOIN formation f 
+    ON f.ID_formation = s.ID_formation
+    INNER JOIN formateur ff ON ff.ID_formateur = s.ID_formateur
+    WHERE s.ID_formation = $ID_formation ";
+$result = mysqli_query($connection, $sessionAfficher);
+}
+}else{
 
     $sessionAfficher = 
         "SELECT * FROM session s 
@@ -202,7 +258,7 @@ if(!empty($_SESSION["ID_apprenant"])){
             
     
     $result = mysqli_query($connection, $sessionAfficher);
-    
+}
     if( mysqli_num_rows ( $result ) > 0 ){
 
         echo '<div class="row ">';
@@ -219,7 +275,7 @@ if(!empty($_SESSION["ID_apprenant"])){
 
     if(!empty($_SESSION["ID_apprenant"])){
 
-        echo ' <div class="card col-md-5" style=" background-color: #BBA8FF;">
+        echo ' <div class="card col-md-5 m-3" style=" background-color: #BBA8FF;">
 
         <div class="card-body">
             <h4 class="card-title">Session ID '.$row["ID_session"].'</h4>
@@ -229,11 +285,12 @@ if(!empty($_SESSION["ID_apprenant"])){
             <p class="card-text"><strong>Places :</strong> ' .$row['nbr_places_max'].'</p>
             <p class="card-text"><strong>Available Seats :</strong> ' .$row['nbr_places_max'] - $placesReserver.'</p>
             <p class="card-text"><strong>Etat :</strong> ' .$row['etat_session']. '</p>
-    
+            
             <form action="gestioninscription.php" method="get">
                 <input class="btn btn-success"  type="submit" name="joinSession" value="Join">
                 <input type="hidden" name="id_session" id="ID"  value="'.$row["ID_session"].'">
             </form>
+            </div>
             
         </div>
         ';

@@ -7,7 +7,7 @@ if (isset($_GET['joinSession'])) {
     $result = mysqli_query($connection, "SELECT * FROM apprenant WHERE ID_apprenant = $idApp");
     $row = mysqli_fetch_assoc($result);
 
-    $sQldispo = y($connection,"SELECT * FROM `session` WHERE ID_session= $idSess ");
+    $sQldispo = mysqli_query($connection,"SELECT * FROM `session` WHERE ID_session= $idSess ");
     $fetch = mysqli_fetch_assoc($sQldispo);
 
     $ChauvechementCount_All = mysqli_query(
