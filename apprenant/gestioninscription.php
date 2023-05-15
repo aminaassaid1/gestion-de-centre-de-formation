@@ -43,7 +43,11 @@ if (isset($_GET['joinSession'])) {
          WHERE ID_session = $idSess;"
     );
     $id_formation = mysqli_fetch_all($sql_formation)[0][0];
-            if ($num_session < 2 && !checksession($num_session_Data,$idSess) && $ChauvechementCount == 0 ) {
+
+                if($fetch["etat_session"] != 'en cours d\'inscription'){
+                header("location : session.php?response=etat&ID_formation=".$id_formation);
+                }
+            elseif ($num_session < 2 && !checksession($num_session_Data,$idSess) && $ChauvechementCount == 0 ) {
                 $checkres = mysqli_query($connection, "SELECT * FROM session WHERE ID_session = '$idSess'");
                 $sqljoin= mysqli_query($connection, "INSERT INTO inscription(ID_apprenant, ID_session) VALUES ('$idApp', '$idSess')");
                 header("Location: session.php?response=done&ID_formation=".$id_formation);
@@ -54,7 +58,8 @@ if (isset($_GET['joinSession'])) {
             }elseif($num_session == 2){
                 header("Location: session.php?response=2sessionsd&ID_formation=".$id_formation);
                 exit();
-            }else{
+            }
+            else{
                 header("Location: session.php?response=cannot&ID_formation=".$id_formation);
             }
 }

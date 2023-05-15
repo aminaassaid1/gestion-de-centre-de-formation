@@ -153,6 +153,25 @@ if(!empty($_SESSION["ID_apprenant"])){
                         </div>
                         </div>
                     <?php
+                }elseif(["response"]=="etat"){
+                    ?>
+                    <button id="modal-btn" type="hidden" class="btn btn-primaryd-none " data-bs-toggle="modal" data-bs-target="#staticBackdrop">Launch static backdrop modal</button>
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                            </div>
+                            <div class="modal-body">
+                            You cannot join this session because the registration status for this session is not in progress
+                            </div>
+                            <div class="modal-footer">
+                            <a href="home.php"  class="btn btn-secondary" >Close</a>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    <?php
                 }
             }
                 
@@ -205,7 +224,7 @@ if(!empty($_SESSION["ID_apprenant"])){
                     <select class="btn btn-outline-dark" name="état" id = "état">
                 
                         <option value="" name = "allCategories" >All</option>
-                        <option value="en_cours_inscription" name = "informatique" >en cours d'inscription</option>
+                        <option value="en cours d\'inscription" name = "informatique" >en cours d'inscription</option>
                         <option value="inscription_achevée" name = "inscription_achevée">inscription achevée</option>
                         <option value="annulée" name = "annulée">annulée</option>
                         <option value="en_cour" name = "en_cour">en cours</option>
@@ -228,7 +247,7 @@ $sessionsql =
 
 if(isset($_GET['filteretat'])){
     $état = $_GET['état'];
-    if ($état != ""){
+    if ($état != "" ){
 
         $sessionsql = "SELECT * FROM session s 
         INNER JOIN formation f ON f.ID_formation = s.ID_formation 
@@ -237,6 +256,7 @@ if(isset($_GET['filteretat'])){
         AND f.ID_formation = $ID_formation";
 
         $result = mysqli_query($connection, $sessionsql);
+
 
 }else {
     $sessionAfficher = 
@@ -254,7 +274,7 @@ $result = mysqli_query($connection, $sessionAfficher);
         INNER JOIN formation f 
         ON f.ID_formation = s.ID_formation
         INNER JOIN formateur ff ON ff.ID_formateur = s.ID_formateur
-        WHERE s.ID_formation = $ID_formation ";
+        WHERE s.ID_formation = $ID_formation AND s.etat_session = 'en cours d\'inscription' ";
             
     
     $result = mysqli_query($connection, $sessionAfficher);
@@ -267,7 +287,7 @@ $result = mysqli_query($connection, $sessionAfficher);
 
     $session_id = $row["ID_session"];
 
-    $placesReserverResult  = mysqli_query($connection, "SELECT COUNT(*) FROM inscription i INNER JOIN apprenant a ON a.ID_apprenant = i.ID_apprenant WHERE ID_session = $session_id");
+    $placesReserverResult  = mysqli_query($connection, "SELECT COUNT(*) FROM inscription i INNER JOIN apprenant a ON a.ID_apprenant = i.ID_apprenant WHERE ID_session = $session_id ");
 
     $placesReserverData = mysqli_fetch_assoc($placesReserverResult);
 
@@ -306,6 +326,36 @@ $result = mysqli_query($connection, $sessionAfficher);
 
 
     }
+    // elseif($row['etat_session'] != 'en cours d\'inscription'){
+
+    //     $sessionAfficher = 
+    //     "SELECT * FROM session s 
+    //     INNER JOIN formation f 
+    //     ON f.ID_formation = s.ID_formation
+    //     INNER JOIN formateur ff ON ff.ID_formateur = s.ID_formateur
+    //     WHERE s.ID_formation = $ID_formation AND s.etat_session = '$état' ";
+
+    //     echo ' <div class="card col-md-5 m-3" style=" background-color: #BBA8FF;">
+
+    //     <div class="card-body">
+    //         <h4 class="card-title">Session ID '.$row["ID_session"].'</h4>
+    //         <p class="card-text"><strong>Start date :</strong> ' .$row['date_debut']. '</p>
+    //         <p class="card-text"><strong>End date:</strong> ' .$row['date_fin']. '</p>
+    //         <p class="card-text"><strong>Former :</strong> ' .$row['nom']. ' ' .$row['prenom']. '</p>
+    //         <p class="card-text"><strong>Places :</strong> ' .$row['nbr_places_max'].'</p>
+    //         <p class="card-text"><strong>Available Seats :</strong> ' .$row['nbr_places_max'] - $placesReserver.'</p>
+    //         <p class="card-text"><strong>Etat :</strong> ' .$row['etat_session']. '</p>
+            
+    //         <form action="gestioninscription.php" method="get">
+    //             <input disabled class="btn btn-success"  type="submit" name="joinSession" value="Join">
+    //             <input type="hidden" name="id_session" id="ID"  value="'.$row["ID_session"].'">
+    //         </form>
+    //         </div>
+            
+    //     </div>
+    //     ';
+    // }
+    
     else{
 
         echo '<div class="row latestsProductsdiv">';
